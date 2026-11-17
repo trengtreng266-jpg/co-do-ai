@@ -130,7 +130,7 @@ with tab0:
                         )
                     )
 
-                reply = None
+                  reply = None
             for ten_model in ("gemini-3.8-flash", "gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.0-flash"):
                 try:
                     response = client.models.generate_content(
