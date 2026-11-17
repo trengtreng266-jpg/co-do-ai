@@ -119,7 +119,7 @@ with tab0:
                 contents_data = final_tourist_prompt
 
             reply = None
-          for ten_model in ("gemini-3.8-flash", "gemini-3.8-flash-lite", "gemini-3.8-flash", "gemini-3.8-flash-lite"):
+            for ten_model in ("gemini-3.8-flash", "gemini-3.8-flash-lite", "gemini-3.8-flash", "gemini-3.8-flash-lite"):
                 try:
                     response = client.models.generate_content(
                         model=ten_model,
