@@ -129,19 +129,30 @@ with tab0:
                             temperature=0.5,
                         )
                     )
+
+                       reply = None
+            for ten_model in ("gemini-3.8-flash", "gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.0-flash"):
+                try:
+                    response = client.models.generate_content(
+                        model=ten_model,
+                        contents=contents_data,
+                        config=types.GenerateContentConfig(
+                            system_instruction=tourist_instruction,
+                            temperature=0.5,
+                        )
+                    )
                     reply = response.text
+                    break
+                 reply = response.text
                     break
                 except Exception as err:
                     if "503" in str(err) or "429" in str(err):
-                        time.sleep(1)
+                        time.sleep(2)
                         continue
                     raise err
+            if not reply:
+                reply = "Hiện tại hệ thống AI đang có quá nhiều du khách truy cập cùng lúc. Quý khách vui lòng bấm hỏi lại sau 5 giây nhé!"
 
-            st.session_state.tourist_messages.append({"role": "assistant", "content": reply})
-            with st.chat_message("assistant"):
-                st.markdown(reply)
-        except Exception as e:
-            st.error(f"Đã xảy ra lỗi kết nối API: {e}")
 
 # ==========================================
 # TAB 1: ĐIỀU PHỐI DU LỊCH XANH + BIỂU ĐỒ
@@ -283,14 +294,15 @@ with tab2:
                             temperature=0.7,
                         )
                     )
-                    reply = response.text
+                      reply = response.text
                     break
                 except Exception as err:
                     if "503" in str(err) or "429" in str(err):
-                        time.sleep(1)
+                        time.sleep(2)
                         continue
                     raise err
-
+            if not reply:
+                reply = "Đa tạ quý khách, hiện tại sóng truyền tin đang nghẽn, xin quý khách vui lòng hỏi lại sau giây lát!"
             audio_bytes = None
             if bat_giong_noi:
                 clean_text = reply.replace("*", "").replace("#", "")
