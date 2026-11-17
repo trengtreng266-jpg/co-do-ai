@@ -22,7 +22,7 @@ with st.sidebar:
     st.title("🏛️ Cố Đô AI")
     st.caption("Hướng dẫn viên Du lịch Thông minh Liên vùng (Hà Nam - Nam Định - Ninh Bình)")
     
-   api_key = st.secrets["GEMINI_API_KEY"]
+    api_key = st.secrets["GEMINI_API_KEY"]
     st.success("✅ Hệ thống AI đã sẵn sàng phục vụ du khách")
     
     st.divider()
