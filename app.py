@@ -118,11 +118,11 @@ with tab0:
             else:
                 contents_data = final_tourist_prompt
 
-            reply = None
-            for lan_thu in range(3):
+                       reply = None
+            for ten_model in ("gemini-3.8-flash", "gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.0-flash"):
                 try:
                     response = client.models.generate_content(
-                        model="gemini-3.8-flash",
+                        model=ten_model,
                         contents=contents_data,
                         config=types.GenerateContentConfig(
                             system_instruction=tourist_instruction,
@@ -132,8 +132,8 @@ with tab0:
                     reply = response.text
                     break
                 except Exception as err:
-                    if "503" in str(err) and lan_thu < 2:
-                        time.sleep(2)
+                    if "503" in str(err) or "429" in str(err):
+                        time.sleep(1)
                         continue
                     raise err
 
@@ -272,12 +272,11 @@ with tab2:
                 )
             else:
                 contents_data = prompt
-
             reply = None
-            for lan_thu in range(3):
+            for ten_model in ("gemini-3.8-flash", "gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.0-flash"):
                 try:
                     response = client.models.generate_content(
-                        model="gemini-3.8-flash",
+                        model=ten_model,
                         contents=contents_data,
                         config=types.GenerateContentConfig(
                             system_instruction=system_prompts.get(nhan_vat),
@@ -287,11 +286,11 @@ with tab2:
                     reply = response.text
                     break
                 except Exception as err:
-                    if "503" in str(err) and lan_thu < 2:
-                        time.sleep(2)
+                    if "503" in str(err) or "429" in str(err):
+                        time.sleep(1)
                         continue
                     raise err
-            
+
             audio_bytes = None
             if bat_giong_noi:
                 clean_text = reply.replace("*", "").replace("#", "")
