@@ -350,7 +350,7 @@ with tab2:
                     )
                 )
 
-            reply = None
+                      reply = None
             for lan_thu in range(4):
                 try:
                     response = client.models.generate_content(
@@ -369,7 +369,7 @@ with tab2:
                         continue
                     raise err
 
-                      if not reply:
+            if not reply:
                 if "Đinh Tiên Hoàng" in nhan_vat:
                     reply = "Trẫm chào quý khách phương xa! Năm 968, sau khi dẹp yên loạn 12 sứ quân, Trẫm chọn đất Hoa Lư núi non hiểm trở làm kinh đô nước Đại Cồ Việt. Quý khách hãy dạo bước thăm đền đài và cảm nhận hào khí non sông thuở đầu dựng nước!"
                 elif "Trần Quốc Tuấn" in nhan_vat:
@@ -379,7 +379,6 @@ with tab2:
                 else:
                     reply = "Bần tăng chào thí chủ! Vùng núi đá vôi Bái Đính – Tam Chúc cảnh sắc thanh tịnh, linh khí hội tụ. Chúc thí chủ có một chuyến hành hương an lạc và nhiều trải nghiệm ý nghĩa."
 
-            
             audio_bytes = None
             if bat_giong_noi:
                 clean_text = reply.replace("*", "").replace("#", "")
@@ -388,7 +387,7 @@ with tab2:
                 tts.write_to_fp(fp)
                 fp.seek(0)
                 audio_bytes = fp.read()
-            
+
             st.session_state.messages.append({"role": "assistant", "content": reply, "audio": audio_bytes})
             with st.chat_message("assistant"):
                 st.markdown(reply)
@@ -396,6 +395,7 @@ with tab2:
                     st.audio(audio_bytes, format="audio/mp3", autoplay=True)
         except Exception as e:
             st.error(f"Đã xảy ra lỗi kết nối API: {e}")
+
 
 # ==========================================
 # TAB 3: BẢN ĐỒ SỐ & ĐỔI QUÀ LÀNG NGHỀ
