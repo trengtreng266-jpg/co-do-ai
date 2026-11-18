@@ -213,6 +213,18 @@ with tab0:
                 st.markdown(reply)
         except Exception as e:
             st.error(f"Đã xảy ra lỗi kết nối API: {e}")
+    if st.session_state.tourist_messages:
+        with st.expander("📜 Xem dữ liệu Lịch sử hội thoại (History) & Tải về"):
+            st.json(st.session_state.tourist_messages)
+            noi_dung_tai = "\n\n".join(
+                [f"{'Du khách' if m['role']=='user' else 'Cố Đô AI'}: {m['content']}" for m in st.session_state.tourist_messages]
+            )
+            st.download_button(
+                label="📥 Tải lịch sử tư vấn về máy (.txt)",
+                data=noi_dung_tai,
+                file_name="lich_su_co_do_ai.txt",
+                mime="text/plain"
+            )
 
 # ==========================================
 # TAB 1: ĐIỀU PHỐI DU LỊCH XANH + BIỂU ĐỒ
