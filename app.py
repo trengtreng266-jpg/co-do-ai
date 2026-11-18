@@ -213,7 +213,7 @@ with tab1:
         co2_tiet_kiem = 0.0
         diem_cong = 0
         
-              if phuong_tien in ("Xe đạp", "Đi bộ / Thuyền nan"):
+        if phuong_tien in ("Xe đạp", "Đi bộ / Thuyền nan"):
             co2_tiet_kiem = round(khoang_cach * 0.15, 2)
             diem_cong += int(khoang_cach * 5)
         elif phuong_tien == "Xe điện / Xe buýt liên vùng":
