@@ -158,9 +158,28 @@ with tab0:
                         continue
                     raise err
 
-      if not reply:
-            cau_hoi_thuong = str(final_tourist_prompt).lower()
-                    if "lịch trình" in cau_hoi_thuong or "tam chúc" in cau_hoi_thuong:
+                reply = None
+            for lan_thu in range(4):
+                try:
+                    response = client.models.generate_content(
+                        model="gemini-3.8-flash",
+                        contents=contents_data,
+                        config=types.GenerateContentConfig(
+                            system_instruction=tourist_instruction,
+                            temperature=0.5,
+                        )
+                    )
+                    reply = response.text
+                    break
+                except Exception as err:
+                    if "503" in str(err) or "429" in str(err):
+                        time.sleep(2)
+                        continue
+                    raise err
+
+            if not reply:
+                cau_hoi_thuong = str(final_tourist_prompt).lower()
+                if "lịch trình" in cau_hoi_thuong or "tam chúc" in cau_hoi_thuong:
                     reply = (
                         "**Gợi ý lịch trình 1 ngày kết nối Tam Chúc (Hà Nam) – Tràng An (Ninh Bình):**\n"
                         "* **07h30 – 10h30:** Tham quan quần thể danh thắng **Tam Chúc** (Đình Tam Chúc, Điện Quan Âm, Điện Pháp Chủ, Chùa Ngọc trên đỉnh núi Thất Tinh).\n"
