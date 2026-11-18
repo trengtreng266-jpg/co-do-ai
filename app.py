@@ -158,8 +158,36 @@ with tab0:
                         continue
                     raise err
 
-            if not reply:
-                reply = "Hiện tại hệ thống AI đang có nhiều du khách truy cập cùng lúc. Quý khách vui lòng bấm hỏi lại sau 5 giây nhé!"
+                    if not reply:
+                cau_hoi_thuong = str(final_tourist_prompt).lower()
+                if "lịch trình" in cau_hoi_thuong or "tam chúc" in cau_hoi_thuong:
+                    reply = (
+                        "**Gợi ý lịch trình 1 ngày kết nối Tam Chúc (Hà Nam) – Tràng An (Ninh Bình):**\n"
+                        "* **07h30 – 10h30:** Tham quan quần thể danh thắng **Tam Chúc** (Đình Tam Chúc, Điện Quan Âm, Điện Pháp Chủ, Chùa Ngọc trên đỉnh núi Thất Tinh).\n"
+                        "* **11h00 – 12h30:** Di chuyển sang Ninh Bình, thưởng thức đặc sản **cơm cháy, dê núi Hoa Lư**.\n"
+                        "* **13h30 – 16h30:** Khám phá **Quần thể danh thắng Tràng An** bằng thuyền nan (tuyến 3 hang động và hành cung Vũ Lâm).\n"
+                        "* **17h00:** Ghé thăm **Phố cổ Hoa Lư** check-in hoàng hôn và mua quà lưu niệm trước khi kết thúc hành trình."
+                    )
+                elif "đặc sản" in cau_hoi_thuong or "món ăn" in cau_hoi_thuong:
+                    reply = (
+                        "**Tinh hoa ẩm thực đặc sản vùng di sản Hà Nam – Nam Định – Ninh Bình:**\n"
+                        "* **Ninh Bình:** Thịt dê núi tái chanh, cơm cháy ruốc, gỏi cá nhệch Kim Sơn, ốc núi Tam Điệp.\n"
+                        "* **Hà Nam:** Cá kho làng Vũ Đại (Nhân Hậu), bánh cuốn Phủ Lý ăn kèm chả nướng, chuối ngự Đại Hoàng.\n"
+                        "* **Nam Định:** Phở bò gia truyền Nam Định, bánh xíu páo, nem nắm Giao Thủy, bánh nhãn Hải Hậu."
+                    )
+                elif "làng nghề" in cau_hoi_thuong or "quà" in cau_hoi_thuong:
+                    reply = (
+                        "**Quà lưu niệm thủ công mỹ nghệ đặc sắc tại các làng nghề truyền thống:**\n"
+                        "* **Làng lụa Nha Xá (Duy Tiên, Hà Nam):** Khăn lụa tơ tằm mềm mại, nhuộm màu tự nhiên từ củ nâu, cánh kiến.\n"
+                        "* **Làng gốm Bồ Bát (Yên Mô, Ninh Bình):** Sản phẩm gốm đất sét trắng men ngọc tinh xảo, mang hoa văn cổ thời Lý – Trần.\n"
+                        "* **Làng đúc đồng Tống Xá (Ý Yên, Nam Định):** Tượng đồng mini, chuông đồng và đồ mỹ nghệ chạm khắc tinh tế."
+                    )
+                else:
+                    reply = (
+                        f"**Thông tin gợi ý dành cho du khách tại {khu_vuc} ({danh_muc}):**\n"
+                        "* **Điểm nhấn hành trình:** Kết nối trục tâm linh – sinh thái từ **Tam Chúc** qua **Cố đô Hoa Lư – Tràng An** tới **Đền Trần – Vườn Quốc gia Xuân Thủy**.\n"
+                        "* **Lưu ý trải nghiệm:** Du khách nên chọn trang phục lịch sự khi vào khu vực đền chùa, ưu tiên xe điện hoặc thuyền nan để tích lũy thêm **Tín chỉ Xanh** trên ứng dụng."
+                    )
 
             st.session_state.tourist_messages.append({"role": "assistant", "content": reply})
             with st.chat_message("assistant"):
@@ -322,8 +350,16 @@ with tab2:
                         continue
                     raise err
 
-            if not reply:
-                reply = "Đa tạ quý khách, hiện tại sóng truyền tin đang nghẽn, xin quý khách vui lòng hỏi lại sau giây lát!"
+                      if not reply:
+                if "Đinh Tiên Hoàng" in nhan_vat:
+                    reply = "Trẫm chào quý khách phương xa! Năm 968, sau khi dẹp yên loạn 12 sứ quân, Trẫm chọn đất Hoa Lư núi non hiểm trở làm kinh đô nước Đại Cồ Việt. Quý khách hãy dạo bước thăm đền đài và cảm nhận hào khí non sông thuở đầu dựng nước!"
+                elif "Trần Quốc Tuấn" in nhan_vat:
+                    reply = "Ta chào quý khách đã ghé thăm đất Thiên Trường! Nơi đây từng là hành cung thứ hai của triều Trần, hun đúc nên hào khí Đông A ba lần đánh thắng giặc Nguyên Mông. Mong quý khách giữ mãi lòng tự hào về truyền thống cha ông."
+                elif "Dương Vân Nga" in nhan_vat:
+                    reply = "Ta hoan nghênh quý khách đến với kinh đô Hoa Lư! Nơi đây lưu giữ dấu ấn chuyển giao lịch sử thiêng liêng giữa hai triều Đinh và Tiền Lê vì vận mệnh bình yên của giang sơn Đại Cồ Việt."
+                else:
+                    reply = "Bần tăng chào thí chủ! Vùng núi đá vôi Bái Đính – Tam Chúc cảnh sắc thanh tịnh, linh khí hội tụ. Chúc thí chủ có một chuyến hành hương an lạc và nhiều trải nghiệm ý nghĩa."
+
             
             audio_bytes = None
             if bat_giong_noi:
