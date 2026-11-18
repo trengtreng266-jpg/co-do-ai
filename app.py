@@ -109,7 +109,7 @@ with tab0:
     user_tourist_input = st.chat_input("Hỏi về lịch trình, điểm check-in, giá vé hoặc món ngon...")
     final_tourist_prompt = quick_prompt if quick_prompt else user_tourist_input
 
-        if final_tourist_prompt or audio_tourist:
+    if final_tourist_prompt or audio_tourist:
         if audio_tourist and not final_tourist_prompt:
             st.session_state.tourist_messages.append({"role": "user", "content": "🎙️ *[Du khách đã hỏi bằng giọng nói]*"})
             with st.chat_message("user"):
