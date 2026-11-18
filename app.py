@@ -213,10 +213,29 @@ with tab1:
         co2_tiet_kiem = 0.0
         diem_cong = 0
         
-        if phuong_tien in ("Xe đạp", "Đi bộ / Thuyền nan"):
+              if phuong_tien in ("Xe đạp", "Đi bộ / Thuyền nan"):
             co2_tiet_kiem = round(khoang_cach * 0.15, 2)
             diem_cong += int(khoang_cach * 5)
         elif phuong_tien == "Xe điện / Xe buýt liên vùng":
+            co2_tiet_kiem = round(khoang_cach * 0.08, 2)
+            diem_cong += int(khoang_cach * 3)
+            
+        dong_chon = data_diem_den.loc[data_diem_den.get("Địa điểm") == diem_chon]
+        trang_thai_diem = str(dong_chon.get("Trạng thái").values)
+        
+        if "🟢" in trang_thai_diem:
+            diem_cong += 25
+            loi_khuyen = f"Tuyệt vời! **{diem_chon}** đang rất thoáng. Bạn được thưởng thêm **25 điểm** vì góp phần giãn cách mật độ khách trên trục di sản."
+        else:
+            loi_khuyen = f"Lưu ý: **{diem_chon}** đang khá đông. Bạn vẫn nhận được điểm phương tiện xanh, nhưng hãy cân nhắc ghé **Đầm Vân Long** hoặc **Vườn Quốc gia Xuân Thủy** để có trải nghiệm xanh trọn vẹn hơn."
+            
+        st.session_state.green_credits += diem_cong
+        
+        st.success(f"Kết quả: Bạn giảm được **{co2_tiet_kiem} kg CO2** và nhận được **+{diem_cong} Tín chỉ Xanh**!")
+        st.info(loi_khuyen)
+
+# ==========================================
+
 # ==========================================
 # TAB 2: NHÂN VẬT LỊCH SỬ (CÓ NHỚ NGỮ CẢNH + GIỌNG NÓI)
 # ==========================================
