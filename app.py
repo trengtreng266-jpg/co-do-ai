@@ -158,9 +158,9 @@ with tab0:
                         continue
                     raise err
 
-                    if not reply:
+      if not reply:
                     cau_hoi_thuong = str(final_tourist_prompt).lower()
-                if "lịch trình" in cau_hoi_thuong or "tam chúc" in cau_hoi_thuong:
+                    if "lịch trình" in cau_hoi_thuong or "tam chúc" in cau_hoi_thuong:
                     reply = (
                         "**Gợi ý lịch trình 1 ngày kết nối Tam Chúc (Hà Nam) – Tràng An (Ninh Bình):**\n"
                         "* **07h30 – 10h30:** Tham quan quần thể danh thắng **Tam Chúc** (Đình Tam Chúc, Điện Quan Âm, Điện Pháp Chủ, Chùa Ngọc trên đỉnh núi Thất Tinh).\n"
