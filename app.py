@@ -350,7 +350,7 @@ with tab2:
                     )
                 )
 
-                      reply = None
+            reply = None
             for lan_thu in range(4):
                 try:
                     response = client.models.generate_content(
