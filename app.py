@@ -159,7 +159,7 @@ with tab0:
                     raise err
 
       if not reply:
-     cau_hoi_thuong = str(final_tourist_prompt).lower()
+            cau_hoi_thuong = str(final_tourist_prompt).lower()
                     if "lịch trình" in cau_hoi_thuong or "tam chúc" in cau_hoi_thuong:
                     reply = (
                         "**Gợi ý lịch trình 1 ngày kết nối Tam Chúc (Hà Nam) – Tràng An (Ninh Bình):**\n"
