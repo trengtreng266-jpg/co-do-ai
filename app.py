@@ -158,24 +158,7 @@ with tab0:
                         continue
                     raise err
 
-                reply = None
-            for lan_thu in range(4):
-                try:
-                    response = client.models.generate_content(
-                        model="gemini-3.8-flash",
-                        contents=contents_data,
-                        config=types.GenerateContentConfig(
-                            system_instruction=tourist_instruction,
-                            temperature=0.5,
-                        )
-                    )
-                    reply = response.text
-                    break
-                except Exception as err:
-                    if "503" in str(err) or "429" in str(err):
-                        time.sleep(2)
-                        continue
-                    raise err
+           
 
             if not reply:
                 cau_hoi_thuong = str(final_tourist_prompt).lower()
